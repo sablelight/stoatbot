@@ -4,52 +4,28 @@ A full-featured Stoat bot built with `stoat.py` and SQLite (aiosqlite). Inspired
 
 ---
 
-## Features
+## What it does
 
-### 🎫 Tickets
-- Open tickets with categories (support, billing, etc.)
-- Ticket transcripts automatically saved to the database and sent as a `.txt` file when closed
-- Staff-only management commands
-- Per-server ticket log channel
+### Tickets
+Open tickets with categories (support, billing, etc.). Transcripts saved to the database and sent as a `.txt` file when closed. Staff-only management commands. Per-server ticket log channel.
 
-### 🎉 Giveaways
-- Timed giveaways with configurable end time
-- Multiple winners
-- Required role to enter
-- **Alt protection:** minimum account age (days) and minimum message count
-- Reroll command for ended giveaways
-- Enter/leave by reacting with 🎉
+### Giveaways
+Timed giveaways with configurable end time. Multiple winners. Required role to enter. Alt protection: minimum account age (days) and minimum message count. Reroll command for ended giveaways. Enter/leave by reacting with 🎉.
 
-### 🔨 Moderation
-- Kick, ban, unban
-- Timed mutes with automatic unmute (background task)
-- Warnings system with IDs, history, and deletion
-- Purge messages (optionally filter by user)
-- Full mod action log in database
-- Mod log channel for all actions
+### Moderation
+Kick, ban, unban. Timed mutes with automatic unmute (background task). Warnings system with IDs, history, and deletion. Purge messages (optionally filter by user). Full mod action log in database. Mod log channel for all actions.
 
-### 📋 Logging
-- Message edits and deletes logged to a channel
-- Member join/leave events
-- Configurable log channel
+### Logging
+Message edits and deletes logged to a channel. Member join/leave events. Configurable log channel.
 
-### 👋 Welcome
-- Fully customizable welcome message with placeholders: `{user}`, `{username}`, `{server}`, `{count}`, `{id}`
-- Test command to preview
-- Configurable welcome channel
+### Welcome
+Fully customizable welcome message with placeholders: `{user}`, `{username}`, `{server}`, `{count}`, `{id}`. Test command to preview. Configurable welcome channel.
 
-### 🎭 Roles
-- Reaction roles (add a reaction to a message → get a role)
-  - Three modes: `toggle`, `add`, `remove`
-- Auto roles on join
-- Give/take role commands
+### Roles
+Reaction roles (add a reaction to a message → get a role) — three modes: `toggle`, `add`, `remove`. Auto roles on join. Give/take role commands.
 
-### 🛡️ Automod
-- Anti-spam (configurable threshold and interval)
-- Anti-invite link filter
-- Anti-excessive-caps filter
-- Bad words filter
-- Message counting for alt protection (giveaway entries use this)
+### Automod
+Anti-spam (configurable threshold and interval). Anti-invite link filter. Anti-excessive-caps filter. Bad words filter. Message counting for alt protection (giveaway entries use this).
 
 ---
 
@@ -70,20 +46,16 @@ cp .env.example .env
 # Edit .env with your bot token and database URL
 ```
 
-### 4. Create the database
-```sql
-CREATE DATABASE stoatbot;
-```
-The bot will create all tables automatically on first run.
-
-### 5. Run the bot
+### 4. Run the bot
 ```bash
 python bot.py
 ```
 
+Tables are created automatically on first run.
+
 ---
 
-## Configuration Commands (run in your server)
+## Configuration Commands
 
 ### First-time setup
 ```
@@ -124,12 +96,12 @@ python bot.py
 ## Project Structure
 
 ```
-stoat-bot/
+stoatbot/
 ├── bot.py                  — Entry point
 ├── requirements.txt
 ├── .env.example
 ├── utils/
-│   ├── db.py               — All database queries (asyncpg)
+│   ├── db.py               — All database queries (aiosqlite)
 │   └── helpers.py          — Shared utilities, embed helpers, duration parser
 └── cogs/
     ├── tickets.py          — Ticket system
