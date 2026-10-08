@@ -189,13 +189,17 @@ class Giveaways(commands.Gear):
         i = 0
         while i < len(parts):
             if parts[i] == "--role" and i + 1 < len(parts):
-                required_role = parts[i + 1]; i += 2
+                required_role = parts[i + 1]
+                i += 2
             elif parts[i] == "--age" and i + 1 < len(parts):
-                min_age = int(parts[i + 1]); i += 2
+                min_age = int(parts[i + 1])
+                i += 2
             elif parts[i] == "--messages" and i + 1 < len(parts):
-                min_messages = int(parts[i + 1]); i += 2
+                min_messages = int(parts[i + 1])
+                i += 2
             else:
-                clean_parts.append(parts[i]); i += 1
+                clean_parts.append(parts[i])
+                i += 1
         prize = " ".join(clean_parts)
 
         try:

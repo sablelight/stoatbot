@@ -79,7 +79,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="user_id",  label="User ID",           placeholder="123456789012345678", required=True,  max_length=20))
         modal.add_item(stoat.TextInput(custom_id="reason",   label="Reason",             placeholder="Reason for kick",    required=False, max_length=500))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         user_id = _field(mi, "user_id")
         reason  = _field(mi, "reason") or "No reason provided"
@@ -103,7 +104,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="user_id", label="User ID",  placeholder="123456789012345678", required=True,  max_length=20))
         modal.add_item(stoat.TextInput(custom_id="reason",  label="Reason",   placeholder="Reason for ban",     required=False, max_length=500))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         user_id = _field(mi, "user_id")
         reason  = _field(mi, "reason") or "No reason provided"
@@ -127,7 +129,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="user_id", label="User ID", placeholder="123456789012345678", required=True, max_length=20))
         modal.add_item(stoat.TextInput(custom_id="reason",  label="Reason",  placeholder="Reason for unban",   required=False, max_length=500))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         user_id = _field(mi, "user_id")
         reason  = _field(mi, "reason") or "No reason provided"
@@ -148,7 +151,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="duration", label="Duration (optional)", placeholder="e.g. 30m, 1h, 1d — leave blank for permanent", required=False, max_length=20))
         modal.add_item(stoat.TextInput(custom_id="reason",   label="Reason",             placeholder="Reason for mute",     required=False, max_length=500))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         user_id      = _field(mi, "user_id")
         duration_str = _field(mi, "duration")
@@ -192,7 +196,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="user_id", label="User ID", placeholder="123456789012345678", required=True,  max_length=20))
         modal.add_item(stoat.TextInput(custom_id="reason",  label="Reason",  placeholder="Reason for unmute",  required=False, max_length=500))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         user_id = _field(mi, "user_id")
         reason  = _field(mi, "reason") or "No reason provided"
@@ -222,7 +227,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="user_id", label="User ID", placeholder="123456789012345678", required=True, max_length=20))
         modal.add_item(stoat.TextInput(custom_id="reason",  label="Reason",  placeholder="Reason for warning", required=True, max_length=500))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         user_id = _field(mi, "user_id")
         reason  = _field(mi, "reason")
@@ -244,7 +250,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="count",   label="Number of messages (1–100)", placeholder="10",                          required=True,  max_length=3))
         modal.add_item(stoat.TextInput(custom_id="user_id", label="Filter by User ID (optional)", placeholder="Leave blank for all messages", required=False, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         try:
             count = int(_field(mi, "count"))
@@ -277,7 +284,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="View Mod Logs")
         modal.add_item(stoat.TextInput(custom_id="user_id", label="User ID", placeholder="123456789012345678", required=True, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         user_id = _field(mi, "user_id")
         try:
@@ -312,7 +320,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="Set Mute Role")
         modal.add_item(stoat.TextInput(custom_id="role_id", label="Role ID", placeholder="123456789012345678", required=True, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
         role_id = _field(mi, "role_id")
         await self.db.set_guild_config(interaction.server.id, mute_role=role_id)
         await mi.response.send_message(embed=success_embed("Mute Role Set", f"Mute role set to <@&{role_id}>"), ephemeral=True)
@@ -323,7 +332,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="Set Staff Role")
         modal.add_item(stoat.TextInput(custom_id="role_id", label="Role ID", placeholder="123456789012345678", required=True, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
         role_id = _field(mi, "role_id")
         await self.db.set_guild_config(interaction.server.id, staff_role=role_id)
         await mi.response.send_message(embed=success_embed("Staff Role Set", f"Staff role set to <@&{role_id}>"), ephemeral=True)
@@ -334,7 +344,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="Set Log Channel")
         modal.add_item(stoat.TextInput(custom_id="channel_id", label="Channel ID", placeholder="123456789012345678", required=True, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
         channel_id = _field(mi, "channel_id")
         await self.db.set_guild_config(interaction.server.id, log_channel=channel_id)
         await mi.response.send_message(embed=success_embed("Log Channel Set", f"Mod logs will go to <#{channel_id}>"), ephemeral=True)
@@ -358,7 +369,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="duration",    label="Duration",                     placeholder="e.g. 1h, 30m, 2d",               required=True,  max_length=20))
         modal.add_item(stoat.TextInput(custom_id="winners",     label="Number of Winners",            placeholder="e.g. 1",                         required=True,  max_length=2))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         prize        = _field(mi, "prize")
         description  = _field(mi, "description")
@@ -409,7 +421,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="End Giveaway")
         modal.add_item(stoat.TextInput(custom_id="message_id", label="Giveaway Message ID", placeholder="123456789012345678", required=True, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         message_id = _field(mi, "message_id")
         giveaway   = await self.db.get_giveaway(message_id)
@@ -431,7 +444,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="message_id", label="Giveaway Message ID", placeholder="123456789012345678", required=True, max_length=20))
         modal.add_item(stoat.TextInput(custom_id="count",      label="Number of winners to reroll", placeholder="1",          required=False, max_length=2))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         message_id = _field(mi, "message_id")
         count_str  = _field(mi, "count", "1")
@@ -460,7 +474,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="Giveaway Info")
         modal.add_item(stoat.TextInput(custom_id="message_id", label="Giveaway Message ID", placeholder="123456789012345678", required=True, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         message_id = _field(mi, "message_id")
         giveaway   = await self.db.get_giveaway(message_id)
@@ -496,7 +511,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="Ticket System Setup")
         modal.add_item(stoat.TextInput(custom_id="log_channel", label="Log Channel ID (optional)", placeholder="Leave blank to use current channel", required=False, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         log_channel = _field(mi, "log_channel") or interaction.channel.id
         await self.db.set_guild_config(interaction.server.id, ticket_log_channel=log_channel)
@@ -510,7 +526,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="emoji",       label="Emoji",                placeholder="e.g. 🎫",         required=False, max_length=10))
         modal.add_item(stoat.TextInput(custom_id="description", label="Description",          placeholder="What is it for?", required=False, max_length=200))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         name        = _field(mi, "name")
         emoji       = _field(mi, "emoji") or "🎫"
@@ -547,7 +564,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="Set Welcome Channel")
         modal.add_item(stoat.TextInput(custom_id="channel_id", label="Channel ID", placeholder="123456789012345678", required=True, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
         channel_id = _field(mi, "channel_id")
         await self.db.set_guild_config(interaction.server.id, welcome_channel=channel_id)
         await mi.response.send_message(embed=success_embed("Welcome Channel Set", f"Welcome messages will go to <#{channel_id}>"), ephemeral=True)
@@ -562,7 +580,8 @@ class SlashCommands(commands.Gear):
             required=True, style=stoat.TextInputStyle.paragraph, max_length=1000,
         ))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
         message = _field(mi, "message")
         await self.db.set_guild_config(interaction.server.id, welcome_message=message)
         await mi.response.send_message(embed=success_embed("Welcome Message Set",
@@ -598,7 +617,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="Add Auto Role")
         modal.add_item(stoat.TextInput(custom_id="role_id", label="Role ID", placeholder="123456789012345678", required=True, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
         role_id = _field(mi, "role_id")
         await self.db.add_auto_role(interaction.server.id, role_id)
         await mi.response.send_message(embed=success_embed("Auto Role Added", f"<@&{role_id}> will be assigned on join."), ephemeral=True)
@@ -609,7 +629,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="Remove Auto Role")
         modal.add_item(stoat.TextInput(custom_id="role_id", label="Role ID", placeholder="123456789012345678", required=True, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
         role_id = _field(mi, "role_id")
         await self.db.remove_auto_role(interaction.server.id, role_id)
         await mi.response.send_message(embed=success_embed("Auto Role Removed", f"<@&{role_id}> removed."), ephemeral=True)
@@ -642,7 +663,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="role_id",    label="Role ID",     placeholder="123456789012345678",          required=True,  max_length=20))
         modal.add_item(stoat.TextInput(custom_id="mode",       label="Mode",        placeholder="toggle / add / remove  (default: toggle)", required=False, max_length=10))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         message_id = _field(mi, "message_id")
         emoji      = _field(mi, "emoji")
@@ -663,7 +685,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="message_id", label="Message ID", placeholder="123456789012345678", required=True, max_length=20))
         modal.add_item(stoat.TextInput(custom_id="emoji",      label="Emoji",      placeholder="e.g. ✅",           required=True, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         message_id = _field(mi, "message_id")
         emoji      = _field(mi, "emoji")
@@ -699,7 +722,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="user_id", label="User ID",  placeholder="123456789012345678", required=True, max_length=20))
         modal.add_item(stoat.TextInput(custom_id="role_id", label="Role ID",  placeholder="123456789012345678", required=True, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         user_id = _field(mi, "user_id")
         role_id = _field(mi, "role_id")
@@ -718,7 +742,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="user_id", label="User ID",  placeholder="123456789012345678", required=True, max_length=20))
         modal.add_item(stoat.TextInput(custom_id="role_id", label="Role ID",  placeholder="123456789012345678", required=True, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         user_id = _field(mi, "user_id")
         role_id = _field(mi, "role_id")
@@ -748,7 +773,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="threshold", label="Message threshold",         placeholder="5  (messages)",         required=False, max_length=3))
         modal.add_item(stoat.TextInput(custom_id="interval",  label="Interval (seconds)",        placeholder="5  (seconds)",          required=False, max_length=3))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
 
         enabled   = _field(mi, "enabled").lower() in ("true", "yes", "1", "on")
         threshold = int(_field(mi, "threshold") or 5)
@@ -763,7 +789,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="Anti-Invite Filter")
         modal.add_item(stoat.TextInput(custom_id="enabled", label="Enable anti-invite?", placeholder="true / false", required=True, max_length=5))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
         enabled = _field(mi, "enabled").lower() in ("true", "yes", "1", "on")
         await self.db.set_automod_config(interaction.server.id, anti_invite=enabled)
         await mi.response.send_message(embed=success_embed("Anti-Invite Updated", f"Anti-invite {'enabled' if enabled else 'disabled'}."), ephemeral=True)
@@ -775,7 +802,8 @@ class SlashCommands(commands.Gear):
         modal.add_item(stoat.TextInput(custom_id="enabled",   label="Enable anti-caps?",       placeholder="true / false",   required=True,  max_length=5))
         modal.add_item(stoat.TextInput(custom_id="threshold", label="Caps % threshold",         placeholder="70  (percent)",  required=False, max_length=3))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
         enabled   = _field(mi, "enabled").lower() in ("true", "yes", "1", "on")
         threshold = int(_field(mi, "threshold") or 70)
         await self.db.set_automod_config(interaction.server.id, anti_caps=enabled, caps_threshold=threshold)
@@ -788,7 +816,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="Add Blocked Word")
         modal.add_item(stoat.TextInput(custom_id="word", label="Word to block", placeholder="e.g. badword", required=True, max_length=100))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
         word = _field(mi, "word").lower()
         cfg  = await self.db.get_automod_config(interaction.server.id)
         words = list(cfg["bad_words"] or []) if cfg else []
@@ -803,7 +832,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="Remove Blocked Word")
         modal.add_item(stoat.TextInput(custom_id="word", label="Word to remove", placeholder="e.g. badword", required=True, max_length=100))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
         word  = _field(mi, "word").lower()
         cfg   = await self.db.get_automod_config(interaction.server.id)
         words = list(cfg["bad_words"] or []) if cfg else []
@@ -841,7 +871,8 @@ class SlashCommands(commands.Gear):
         modal = stoat.Modal(title="Set Log Channel")
         modal.add_item(stoat.TextInput(custom_id="channel_id", label="Channel ID", placeholder="123456789012345678", required=True, max_length=20))
         mi = await _wait_modal(self.bot, interaction, modal)
-        if not mi: return
+        if not mi:
+            return
         channel_id = _field(mi, "channel_id")
         await self.db.set_guild_config(interaction.server.id, log_channel=channel_id)
         await mi.response.send_message(embed=success_embed("Log Channel Set", f"Logs will go to <#{channel_id}>"), ephemeral=True)
