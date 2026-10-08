@@ -1,7 +1,5 @@
-import stoat
 from stoat.ext import commands
 from utils.helpers import info_embed, is_staff
-from utils.db import Database
 
 HELP_TEXT = """
 **🎫 Tickets**
@@ -122,7 +120,6 @@ HELP_TEXT = """
 `!selfrole list` — List assignable roles
 """
 
-
 class Help(commands.Gear):
     """Built-in help command."""
 
@@ -136,7 +133,6 @@ class Help(commands.Gear):
         prefix = ctx.prefix or "!"
         formatted = HELP_TEXT.replace("`!", f"`{prefix}")
         await ctx.send(embeds=[info_embed("Commands", formatted.strip())])
-
 
 async def setup(bot):
     await bot.add_gear(Help(bot))

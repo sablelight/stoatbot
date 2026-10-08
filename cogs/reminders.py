@@ -1,12 +1,10 @@
-import stoat
 from stoat.ext import commands
 from utils.helpers import success_embed, error_embed, info_embed, parse_duration, format_duration, utcnow, is_staff
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta
 import logging
 import asyncio
 
 log = logging.getLogger("reminders")
-
 
 class Reminders(commands.Gear):
     """Set and manage reminders."""
@@ -57,7 +55,7 @@ class Reminders(commands.Gear):
             return await ctx.send(embeds=[error_embed("Too Long", "Maximum duration is 1 year.")])
 
         remind_at = utcnow() + timedelta(seconds=seconds)
-        reminder = await self.db.create_reminder(
+        await self.db.create_reminder(
             ctx.server.id, ctx.channel.id, ctx.author.id, message,
             remind_at.isoformat()
         )
@@ -88,7 +86,6 @@ class Reminders(commands.Gear):
         """Delete a reminder by its ID."""
         await self.db.delete_reminder(reminder_id)
         await ctx.send(embeds=[success_embed("Reminder Deleted", f"Deleted reminder `#{reminder_id}`.")])
-
 
 async def setup(bot):
     await bot.add_gear(Reminders(bot))

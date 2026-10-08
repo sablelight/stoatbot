@@ -1,6 +1,6 @@
 import stoat
 from stoat.ext import commands
-from utils.helpers import success_embed, error_embed, info_embed, is_staff, _delete_after
+from utils.helpers import success_embed, info_embed, is_staff, _delete_after
 from collections import defaultdict, deque
 import asyncio
 import time
@@ -10,7 +10,6 @@ import logging
 log = logging.getLogger("automod")
 
 INVITE_PATTERN = re.compile(r"(discord\.gg|discord\.com/invite|stoat\.chat|rvlt\.gg)/\S+", re.IGNORECASE)
-
 
 class Automod(commands.Gear):
     """Automatic moderation: spam, invites, caps, bad words, message tracking."""
@@ -187,7 +186,6 @@ class Automod(commands.Gear):
             words.remove(word)
         await self.db.set_automod_config(ctx.server.id, bad_words=words)
         await ctx.send(embeds=[success_embed("Word Removed", f"`{word}` removed from blocked words.")])
-
 
 async def setup(bot):
     await bot.add_gear(Automod(bot))

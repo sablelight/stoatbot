@@ -372,7 +372,6 @@ class Database:
         # Upsert: insert or update only the provided keys
         cols = list(kwargs.keys())
         vals = list(kwargs.values())
-        placeholders = ",".join("?" * len(cols))
         set_clause   = ",".join(f"{c}=excluded.{c}" for c in cols)
         await self._exec(
             f"INSERT INTO guild_config (guild_id,{','.join(cols)}) VALUES (?{',?' * len(cols)}) "
@@ -850,19 +849,6 @@ class Database:
             "SELECT trigger, response, trigger_type FROM custom_commands WHERE guild_id=?", (guild_id,)
         )
         return rows
-        # Serialise lists to JSON
-        for k, v in kwargs.items():
-            if isinstance(v, list):
-                kwargs[k] = json.dumps(v)
-        cols = list(kwargs.keys())
-        vals = list(kwargs.values())
-        set_clause = ",".join(f"{c}=excluded.{c}" for c in cols)
-        await self._exec(
-            f"INSERT INTO automod_config (guild_id,{','.join(cols)}) VALUES (?{',?' * len(cols)}) "
-            f"ON CONFLICT(guild_id) DO UPDATE SET {set_clause}",
-            (guild_id, *vals)
-        )
-
     # ── Invite Codes ────────────────────────────────────────────────────────
 
     async def sync_invite_codes(self, guild_id: str, codes: list[dict]):

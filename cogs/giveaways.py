@@ -1,17 +1,12 @@
 import stoat
 from stoat.ext import commands
-from utils.helpers import (
-    _delete_after,
-    success_embed, error_embed, info_embed, warn_embed,
-    parse_duration, format_duration, utcnow, is_staff
-)
+from utils.helpers import _delete_after, success_embed, error_embed, info_embed, warn_embed, parse_duration, utcnow, is_staff
 import asyncio
 import random
 import logging
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta
 
 log = logging.getLogger("giveaways")
-
 
 class Giveaways(commands.Gear):
     """Full-featured giveaway system with alt protection."""
@@ -435,7 +430,6 @@ class Giveaways(commands.Gear):
 
         await self.db.leave_giveaway(giveaway["id"], event.user_id)
         await self._update_giveaway_message(giveaway)
-
 
 async def setup(bot):
     await bot.add_gear(Giveaways(bot))

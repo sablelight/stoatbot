@@ -1,11 +1,9 @@
-import stoat
 from stoat.ext import commands
-from utils.helpers import success_embed, error_embed, info_embed, warn_embed, is_staff, parse_duration, format_duration, utcnow
-from datetime import datetime, timedelta, timezone
+from utils.helpers import success_embed, error_embed, info_embed, warn_embed, is_staff, parse_duration, utcnow
+from datetime import datetime, timedelta
 import logging
 
 log = logging.getLogger("events")
-
 
 class Events(commands.Gear):
     """Create and manage events with RSVP."""
@@ -56,7 +54,6 @@ class Events(commands.Gear):
             if e.get("event_time"):
                 try:
                     dt = datetime.fromisoformat(e["event_time"]) if isinstance(e["event_time"], str) else e["event_time"]
-                    remaining = (dt - utcnow()).total_seconds()
                     time_str = f" — <t:{int(dt.timestamp())}:R>"
                 except Exception:
                     time_str = f" — {e['event_time']}"
@@ -175,7 +172,6 @@ class Events(commands.Gear):
             return await ctx.send(embeds=[warn_embed("Not RSVPed", "You're not on the list for this event.")])
         await self.db.remove_rsvp(event_id, ctx.author.id)
         await ctx.send(embeds=[success_embed("RSVP Cancelled", f"You're no longer attending **{event['title']}**.")])
-
 
 async def setup(bot):
     await bot.add_gear(Events(bot))

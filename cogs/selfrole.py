@@ -1,10 +1,8 @@
-import stoat
 from stoat.ext import commands
 from utils.helpers import success_embed, error_embed, info_embed, is_staff
 import logging
 
 log = logging.getLogger("selfrole")
-
 
 class SelfRole(commands.Gear):
     """Self-assignable roles — let members opt into roles."""
@@ -78,7 +76,6 @@ class SelfRole(commands.Gear):
             return await ctx.send(embeds=[info_embed("Self Roles", "No self-assignable roles configured.")])
         lines = [f"<@&{r['role_id']}> — {r['name']}" + (f" — {r['description']}" if r.get("description") else "") for r in roles]
         await ctx.send(embeds=[info_embed(f"Self Roles ({len(roles)})", "\n".join(lines))])
-
 
 async def setup(bot):
     await bot.add_gear(SelfRole(bot))

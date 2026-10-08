@@ -1,12 +1,11 @@
 import stoat
 from stoat.ext import commands
-from utils.helpers import success_embed, error_embed, info_embed, is_staff
+from utils.helpers import success_embed, info_embed, is_staff
 import logging
 
 log = logging.getLogger("welcome")
 
 DEFAULT_WELCOME = "Welcome to **{server}**, {user}! 🎉 You are member #{count}."
-
 
 class Welcome(commands.Gear):
     """Configurable welcome messages and auto-role assignment."""
@@ -135,7 +134,6 @@ class Welcome(commands.Gear):
         """Remove an auto role."""
         await self.db.remove_auto_role(ctx.server.id, role_id)
         await ctx.send(embeds=[success_embed("Auto Role Removed", f"<@&{role_id}> removed.")])
-
 
 async def setup(bot):
     await bot.add_gear(Welcome(bot))

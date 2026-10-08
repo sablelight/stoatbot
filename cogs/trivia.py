@@ -1,6 +1,6 @@
 import stoat
 from stoat.ext import commands
-from utils.helpers import success_embed, error_embed, info_embed, warn_embed, is_staff
+from utils.helpers import success_embed, info_embed, warn_embed, is_staff
 import logging
 import random
 import asyncio
@@ -45,7 +45,6 @@ QUESTIONS = [
     {"q": "What is the deepest ocean trench?", "a": "mariana trench"},
     {"q": "What is the speed of light in km/s?", "a": "299792"},
 ]
-
 
 class Trivia(commands.Gear):
     """Trivia game — answer questions and earn points."""
@@ -156,7 +155,6 @@ class Trivia(commands.Gear):
                 f"<@{event.message.author.id}> got it right! The answer was **{correct}**.")])
             await asyncio.sleep(3)
             await self._next_question(event.message.channel, game)
-
 
 async def setup(bot):
     await bot.add_gear(Trivia(bot))

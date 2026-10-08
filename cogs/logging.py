@@ -1,10 +1,9 @@
 import stoat
 from stoat.ext import commands
-from utils.helpers import success_embed, error_embed, info_embed, utcnow, is_staff
+from utils.helpers import success_embed, info_embed, is_staff
 import logging
 
 log = logging.getLogger("logging_cog")
-
 
 class Logging(commands.Gear):
     """Audit log: message edits, deletes, member join/leave, role changes."""
@@ -158,7 +157,6 @@ class Logging(commands.Gear):
         """Disable logging."""
         await self.db.set_guild_config(ctx.server.id, log_channel=None)
         await ctx.send(embeds=[success_embed("Logging Disabled", "Audit logs have been turned off.")])
-
 
 async def setup(bot):
     await bot.add_gear(Logging(bot))

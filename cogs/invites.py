@@ -1,11 +1,10 @@
 import stoat
 from stoat.ext import commands
-from utils.helpers import success_embed, error_embed, info_embed, is_staff
+from utils.helpers import error_embed, info_embed, is_staff
 import asyncio
 import logging
 
 log = logging.getLogger("invites")
-
 
 class Invites(commands.Gear):
     """Invite tracking system."""
@@ -175,7 +174,6 @@ class Invites(commands.Gear):
             f"**Total people invited:** {total}\n"
             f"**Still in server:** {active}"
         )])
-
 
 async def setup(bot):
     await bot.add_gear(Invites(bot))

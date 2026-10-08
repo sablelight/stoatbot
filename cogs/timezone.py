@@ -1,7 +1,7 @@
 import stoat
 from stoat.ext import commands
-from utils.helpers import success_embed, error_embed, info_embed, utcnow, is_staff
-from datetime import datetime, timezone, timedelta
+from utils.helpers import success_embed, error_embed, info_embed, is_staff
+from datetime import datetime
 import logging
 
 log = logging.getLogger("timezone")
@@ -19,7 +19,6 @@ COMMON_TZ = {
     "aest": "Australia/Sydney", "aedt": "Australia/Sydney",
     "nzst": "Pacific/Auckland", "nzdt": "Pacific/Auckland",
 }
-
 
 class Timezone(commands.Gear):
     """Set your timezone and convert times."""
@@ -80,7 +79,6 @@ class Timezone(commands.Gear):
         """Delete your timezone."""
         await self.db.delete_user_timezone(ctx.author.id)
         await ctx.send(embeds=[success_embed("Timezone Deleted", "Your timezone has been removed.")])
-
 
 async def setup(bot):
     await bot.add_gear(Timezone(bot))

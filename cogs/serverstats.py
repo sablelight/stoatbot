@@ -1,10 +1,8 @@
-import stoat
 from stoat.ext import commands
 from utils.helpers import info_embed, is_staff
 import logging
 
 log = logging.getLogger("serverstats")
-
 
 class ServerStats(commands.Gear):
     """Server statistics."""
@@ -34,7 +32,6 @@ class ServerStats(commands.Gear):
             f"**ID:** {guild.id}"
         )
         await ctx.send(embeds=[embed])
-
 
 async def setup(bot):
     await bot.add_gear(ServerStats(bot))
